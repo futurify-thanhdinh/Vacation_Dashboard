@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 var path = require('path');
 var gulp = require('gulp');
@@ -20,7 +20,7 @@ gulp.task('partials', function ()
             removeComments    : true
         }))
         .pipe($.angularTemplatecache('templateCacheHtml.js', {
-            module: 'fuse',
+            module: 'vacation',
             root  : 'app'
         }))
         .pipe(gulp.dest(conf.paths.tmp + '/partials/'));

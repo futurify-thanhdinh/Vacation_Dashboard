@@ -1,4 +1,4 @@
-(function ()
+﻿(function ()
 {
     'use strict';
 
@@ -6,7 +6,7 @@
      * Main module of the Fuse
      */
     angular
-        .module('fuse', [
+        .module('vacation', [
 
             // Core
             'app.core',

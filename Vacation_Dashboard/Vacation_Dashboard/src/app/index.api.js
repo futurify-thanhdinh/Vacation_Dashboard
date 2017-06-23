@@ -1,9 +1,9 @@
-(function ()
+﻿(function ()
 {
     'use strict';
 
     angular
-        .module('fuse')
+        .module('vacation')
         .factory('api', apiService);
 
     /** @ngInject */

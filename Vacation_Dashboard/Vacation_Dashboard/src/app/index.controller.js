@@ -1,9 +1,9 @@
-(function ()
+﻿(function ()
 {
     'use strict';
 
     angular
-        .module('fuse')
+        .module('vacation')
         .controller('IndexController', IndexController);
 
     /** @ngInject */

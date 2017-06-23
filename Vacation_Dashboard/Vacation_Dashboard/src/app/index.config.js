@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('fuse')
+        .module('vacation')
         .config(config);
 
     /** @ngInject */
