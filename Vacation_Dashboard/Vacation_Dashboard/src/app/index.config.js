@@ -38,7 +38,7 @@
         msNavigationServiceProvider.saveItem('apps.profiles.employees', {
             title: 'Employees',
             icon: 'icon-account',
-            state: 'app.dashboards_project',
+            state: 'app.profile.employee',
             class: 'navigation-dashboards project-dashboard',
             weight: 1
         });
