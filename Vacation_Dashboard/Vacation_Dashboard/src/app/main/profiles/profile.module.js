@@ -10,8 +10,8 @@
         // State
         $stateProvider.state('app.profile', {
             url: '/profile',
-            view: {
-                'main@': {
+            views: {
+                'content@app': {
                     template: '<div class="container-fluid" ui-view></div>'
                 }
             }
