@@ -22,6 +22,7 @@
         msNavigationServiceProvider.saveItem('apps.grants', {
             title: 'Grants',
             icon: 'icon-lock-outline',
+            state: 'app.grant',
             class: 'navigation-dashboards',
             weight: 1
         });
@@ -47,7 +48,7 @@
         msNavigationServiceProvider.saveItem('apps.profiles.teams', {
             title: 'Teams',
             icon: 'icon-account-multiple',
-            state: 'app.dashboards_project',
+            state: 'app.profile.team',
             class: 'navigation-dashboards project-dashboard',
             weight: 1
         });
@@ -56,6 +57,7 @@
         msNavigationServiceProvider.saveItem('apps.notifications', {
             title: 'Notifications',
             icon: 'icon-bell-outline',
+            state: 'app.notification',
             class: 'navigation-dashboards',
             weight: 1
         });
@@ -64,6 +66,7 @@
         msNavigationServiceProvider.saveItem('apps.reports', {
             title: 'Reports',
             icon: 'icon-chart-bar',
+            state: 'app.report',
             class: 'navigation-dashboards',
             weight: 1
         });
@@ -72,6 +75,7 @@
         msNavigationServiceProvider.saveItem('apps.schedules', {
             title: 'Schedules',
             icon: 'icon-timetable',
+            state: 'app.schedule',
             class: 'navigation-dashboards',
             weight: 1
         });

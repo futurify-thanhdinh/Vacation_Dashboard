@@ -20,11 +20,21 @@
             // Quick Panel
             'app.quick-panel',
 
-            // Sample
+            // app module
             'app.sample',
 
             'app.profile',
 
             'app.profile.employee',
+
+            'app.notification',
+
+            'app.grant',
+
+            'app.team',
+
+            'app.report',
+
+            'app.schedule'
         ]);
 })();
