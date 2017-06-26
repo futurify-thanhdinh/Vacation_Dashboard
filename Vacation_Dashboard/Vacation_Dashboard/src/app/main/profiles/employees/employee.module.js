@@ -7,7 +7,7 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider)
+    function config($stateProvider, $locationProvider)
     {
         // State
         $stateProvider.state('app.profile.employee', {
@@ -16,7 +16,7 @@
             controller: 'EmployeeController as emc'
                 
         });
-
+        $locationProvider.html5Mode(true);
         
     }
 })();

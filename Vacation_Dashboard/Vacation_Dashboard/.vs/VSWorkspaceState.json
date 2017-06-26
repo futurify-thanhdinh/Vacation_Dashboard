@@ -3,10 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\core",
+    "\\src\\app\\core\\layouts",
     "\\src\\app\\main",
     "\\src\\app\\main\\profiles",
-    "\\src\\assets"
+    "\\src\\app\\main\\profiles\\employees",
+    "\\src\\app\\main\\profiles\\employees\\controllers",
+    "\\src\\app\\main\\profiles\\employees\\views"
   ],
-  "SelectedNode": "\\src\\app\\index.route.js",
+  "SelectedNode": "\\src\\app\\main\\profiles\\employees\\views\\EmployeeList.html",
   "PreviewInSolutionExplorer": false
 }

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.profile.employee', ['app.profile'])
+        .module('app.profile.employee')
         .controller('EmployeeController', EmployeeController);
 
     /** @ngInject */
