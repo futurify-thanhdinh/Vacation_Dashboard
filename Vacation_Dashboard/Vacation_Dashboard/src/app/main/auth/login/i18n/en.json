@@ -1,0 +1,22 @@
+﻿{
+    "LOGIN_V2": {
+        "INTRO_TITLE": "Welcome to Futurify Vacation!",
+        "INTRO_DESCRIPTION": "Trang quản lý lịch nghỉ của toàn bộ nhân viên công ty futurify",
+        "TITLE": "Log in to futurify vacation", 
+        "EMAIL": "Email",
+        "PASSWORD": "Password",
+        "REMEMBER_ME": "Remember Me",
+        "FORGOT_PASSWORD": "Forgot Password?",
+        "LOG_IN": "LOG IN",
+        "OR": "OR",
+        "WITH_GOOGLE": "Log in with Google",
+        "WITH_FACEBOOK": "Log in with Facebook",
+        "DONT_HAVE_ACCOUNT": "Don't have an account?",
+        "CREATE_ACCOUNT": "Create an account",
+        "ERRORS": {
+            "EMAIL_REQUIRED": "Email field is required",
+            "EMAIL_MUST_VALID": "Email must be a valid e-mail address",
+            "PASSWORD_REQUIRED": "Password field is required"
+        }
+    }
+}

@@ -14,12 +14,11 @@
             url: '/notifications',
             views: {
                 'content@app': {
-                    templateUrl: 'app/main/notifications/views/NotificatoinList.html',
+                    templateUrl: 'app/main/notifications/views/NotificationList.html',
                     controller: 'NotificationController as noc'
                 }
-            }
+            } 
         });
-      
-        
+         
     }
 })();

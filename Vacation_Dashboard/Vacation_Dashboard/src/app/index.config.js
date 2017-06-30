@@ -21,8 +21,25 @@
         // Apps.Grants
         msNavigationServiceProvider.saveItem('apps.grants', {
             title: 'Grants',
+            icon: 'icon-lock-outline', 
+            class: 'navigation-dashboards',
+            weight: 1
+        });
+
+        // Apps.Grants.Roles
+        msNavigationServiceProvider.saveItem('apps.grants.roles', {
+            title: 'Roles And Permissions',
             icon: 'icon-lock-outline',
-            state: 'app.grant',
+            state: 'app.grant.role',
+            class: 'navigation-dashboards',
+            weight: 1
+        });
+
+        // Apps.Grants.Users
+        msNavigationServiceProvider.saveItem('apps.grants.users', {
+            title: 'Users',
+            icon: 'icon-lock-outline',
+            state: 'app.grant.user',
             class: 'navigation-dashboards',
             weight: 1
         });

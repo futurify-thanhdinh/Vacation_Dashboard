@@ -20,6 +20,9 @@
             // Quick Panel
             'app.quick-panel',
 
+            "kendo.directives",
+
+
             // app module
             'app.sample',
 
@@ -35,6 +38,16 @@
 
             'app.report',
 
-            'app.schedule'
+            'app.schedule',
+
+            'app.grant.role',
+
+            'app.pages.auth.login-v2',
+
+            'app.pages.auth.register-v2',
+
+            'app.pages.auth.reset-password',
+
+            'app.pages.auth.forgot-password'
         ]);
 })();

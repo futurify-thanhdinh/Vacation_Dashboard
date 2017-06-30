@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.grant', [])
+        .module('app.grant', ['app.grant.user', 'app.grant.role'])
         .config(config);
 
     /** @ngInject */
@@ -12,8 +12,7 @@
             url: '/grants',
             views: {
                 'content@app': {
-                    templateUrl: 'app/main/auth/grants/views/GrantList.html',
-                    controller: 'GrantController as gtc'
+                    template: '<div class="container-fluid" ui-view></div>'
                 }
             }
         });

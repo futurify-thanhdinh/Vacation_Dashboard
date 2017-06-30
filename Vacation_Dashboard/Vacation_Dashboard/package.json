@@ -1,7 +1,9 @@
 {
   "name": "fuse",
   "version": "1.4.3",
-  "dependencies": {},
+  "dependencies": {
+    "@progress/kendo-ui": "^2017.2.621"
+  },
   "scripts": {
     "test": "gulp test"
   },

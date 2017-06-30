@@ -1,4 +1,4 @@
-(function ()
+﻿(function ()
 {
     'use strict';
 
@@ -116,6 +116,7 @@
          */
         function logout()
         {
+            $state.go('app.pages_auth_login-v2');
             // Do logout here..
         }
 

@@ -13,7 +13,8 @@
         $stateProvider.state('app.profile.employee', {
             url      : '/employee',
             templateUrl: 'app/main/profiles/employees/views/EmployeeList.html',
-            controller: 'EmployeeController as emc'
+            controller: 'EmployeeController',
+            controllerAs : 'emc'
                 
         });
          

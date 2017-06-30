@@ -1,4 +1,4 @@
-(function ()
+﻿(function ()
 {
     'use strict';
 
@@ -7,13 +7,16 @@
         .controller('SampleController', SampleController);
 
     /** @ngInject */
-    function SampleController(SampleData)
+    function SampleController(SampleData, $rootScope)
     {
         var vm = this;
-
+        
+        $rootScope.ajax.get("http://localhost:65235/api/values", function (res) {
+            console.log(res);
+        });
         // Data
         vm.helloText = SampleData.data.helloText;
-
+         
         // Methods
 
         //////////

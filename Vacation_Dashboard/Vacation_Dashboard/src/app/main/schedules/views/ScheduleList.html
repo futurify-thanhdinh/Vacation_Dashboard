@@ -1,1 +1,8 @@
-﻿<h1>Hello Schedule</h1>
+﻿<h1 style="text-align:center;">Vacation Schedule</h1>
+
+<div ng-controller="ScheduleController">
+  <div kendo-scheduler k-options="schedulerOptions" style="margin : 10px 10px;">
+    <span k-event-template class='custom-event'>{{dataItem.title}}</span>
+    <div k-all-day-event-template class='custom-all-day-event'>{{dataItem.title}}</div>
+  </div>
+</div>
