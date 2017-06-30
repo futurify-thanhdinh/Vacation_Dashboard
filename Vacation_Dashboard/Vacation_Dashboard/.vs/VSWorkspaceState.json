@@ -7,13 +7,10 @@
     "\\src\\app\\main\\auth",
     "\\src\\app\\main\\auth\\login",
     "\\src\\app\\main\\auth\\reset-password",
-    "\\src\\app\\main\\profiles",
-    "\\src\\app\\main\\profiles\\employees",
-    "\\src\\app\\main\\profiles\\employees\\controllers",
-    "\\src\\app\\main\\sample",
     "\\src\\assets",
     "\\src\\assets\\images",
     "\\src\\assets\\images\\avatars"
   ],
+  "SelectedNode": "\\src\\app\\main\\main.controller.js",
   "PreviewInSolutionExplorer": false
 }
