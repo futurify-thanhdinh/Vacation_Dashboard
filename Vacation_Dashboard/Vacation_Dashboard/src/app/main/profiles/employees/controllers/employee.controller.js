@@ -102,7 +102,7 @@
                                       LastName: value.lastName,
                                       GenderId: genderid,
                                       Gender: gender,
-                                      BirthDay: value.birthDate,
+                                      BirthDate: value.birthDate,
                                       PositionId: value.positionId,
                                       Position: position,
                                       PhoneNumber: value.phoneNumber,
@@ -125,7 +125,12 @@
                         e.success({ data: e.data });
                     },
                     update: function (e) {
-                        //console.log(e.data);
+                        var data = { Id: e.data.Id, FirstName: e.data.FirstName, LastName: e.data.LastName, BirthDate: e.data.BirthDate, Gender: e.data.GenderId, PositionId: e.data.PositionId, PhoneNumber: e.data.PhoneNumber, Email: e.data.Email, RemainDayOff: e.data.RemainDayOff, Avatar: e.data.Avatar };
+                        $rootScope.ajax.get("http://localhost:65235/api/Employee/UpdateInfo", data, function (res) {
+                            $window.alert("Updated Employee Infomation Successfully");
+                            console.log(res);
+                        });
+                        console.log(e.data);
                         $scope.genders.forEach(function (gen) {
                             if (gen.id == e.data.GenderId)
                             {
@@ -152,7 +157,7 @@
                             LastName: { type: 'string', editable: true },
                             GenderId: { type: 'number', editable: true },
                             Gender: { type: 'string', editable: true },
-                            BirthDay: { type: 'date', editable: true },
+                            BirthDate: { type: 'date', editable: true },
                             PositionId: { type: 'number', editable: true },
                             Position: { type: 'string', editable: true },
                             PhoneNumber: { type: 'string', editable: true },
@@ -236,7 +241,7 @@
                             }
                         }
                     }, {
-                        field: "BirthDay", title: "Date Of Birth",
+                        field: "BirthDate", title: "Date Of Birth",
                         format: "{0:dd/MM/yyyy}",
                         filterable: {
                             ui: "datetimepicker"

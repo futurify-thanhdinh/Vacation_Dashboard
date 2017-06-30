@@ -48,7 +48,12 @@
             
             utils.removeProperty('$id', data);
 
-            $http.post(url, data).success(function (res) {
+            $http.post(url, data, {
+                transformRequest: angular.identity,
+                transformResponse: angular.identity,
+                headers: {
+                    'Content-Type': undefined
+                }} ).success(function (res) {
                  
                 if (typeof successHandler != 'undefined' && successHandler != null)
                     successHandler(res);
