@@ -48,6 +48,8 @@
 
             'app.pages.auth.reset-password',
 
-            'app.pages.auth.forgot-password'
+            'app.pages.auth.forgot-password',
+
+            'app.profile.position'
         ]);
 })();

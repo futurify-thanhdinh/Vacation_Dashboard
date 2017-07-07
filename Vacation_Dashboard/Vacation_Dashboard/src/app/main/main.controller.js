@@ -45,15 +45,9 @@
 
         //override $http.post method
         $rootScope.ajax.post = function (url, data, successHandler, errorHandler) {
-            
-            utils.removeProperty('$id', data);
+           
 
-            $http.post(url, data, {
-                transformRequest: angular.identity,
-                transformResponse: angular.identity,
-                headers: {
-                    'Content-Type': undefined
-                }} ).success(function (res) {
+            $http.post(url, data ).success(function (res) {
                  
                 if (typeof successHandler != 'undefined' && successHandler != null)
                     successHandler(res);
@@ -84,7 +78,7 @@
         //override $http.push method
         $rootScope.ajax.put = function (url, data, successHandler, errorHandler) {
             
-            utils.removeProperty('$id', data);
+            
             $http.put(url, data).success(function (res) {
                 if (typeof successHandler != 'undefined' && successHandler != null)
                     successHandler(res);
@@ -120,7 +114,7 @@
         //override $http.delete method
         $rootScope.ajax.delete = function (url, data, successHandler, errorHandler) {
             
-            utils.removeProperty('$id', data);
+           
             $http.delete(url, data).success(function (res) {
                 if (typeof successHandler != 'undefined' && successHandler != null)
                     successHandler(res);

@@ -6,14 +6,20 @@
         .controller('TeamController', TeamController);
 
     /** @ngInject */
-    function TeamController($scope, $log, $mdDialog) {
+    function TeamController($scope, $log, $mdDialog, $rootScope) {
+
+        $rootScope.ajax.get("http://localhost:65235/api/Team/GetAllEmployees", function (employees) {
+            $scope.employees = employees;
+            getTeamData();
+            bindDataGrid();
+        });
 
         var readonlyEditor = function (container, options) {
             if (options.field == 'Leader') {
-                var input = $('<input data-text-field="value" data-value-field="value" data-bind="value:Leader"/>');
+                var input = $('<input data-text-field="name" data-value-field="id" data-bind="value:LeaderId"/>');
                 input.appendTo(container)
                     .kendoDropDownList({
-                        dataSource: $scope.leaders
+                        dataSource: $scope.employees,
                     });
             }
             else {
@@ -25,135 +31,165 @@
                         dataSource: $scope.employees
                     });
             }
+             
+            
         };
+        var getTeamData = function () {
+            $scope.dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (e) {
 
-        $scope.dataSource = new kendo.data.DataSource({
-            transport: {
-                read: function (e) {
-                    console.log(e.data);
-                    var data = [];
-                    $scope.data.forEach(function (value) {
-                        var members = '';
-                        var memberids = [];
-                        value.Members.forEach(function (value) {
-                            members += '-' + value.name + '<br/>';
-                            memberids.push(value.id);
+                        $rootScope.ajax.get("http://localhost:65235/api/Team/GetAllTeam", function (teams) {
+                            console.log(teams);
+                            var data = [];
+                            teams.forEach(function (value) {
+                                var members = '';
+                                var leader = '';
+                                var memberids = [];
+                                $scope.employees.forEach(function (value) {
+                                    if (value.MemberIds.includes(value.id)) {
+                                        members += '-' + value.name + '<br/>';
+                                    }
+                                });
+                                $scope.employees.forEach(function (value) {
+                                    if (e.data.LeaderId == value.id) {
+                                        leader = value.name;
+                                    }
+                                });
+                                data.push({
+                                    Id: value.Id,
+                                    TeamName: value.Name,
+                                    Leader: value.Leader,
+                                    LeaderId: value.LeaderId,
+                                    MemberIds: memberids,
+                                    Members: members
+                                });
+                            });
+                            e.success({ data: data, total: data.length });
                         });
-                        data.push({
-                            Id: value.Id,
-                            TeamName: value.TeamName,
-                            Leader: value.Leader,
-                            MemberIds: memberids,
-                            Members: members,
-                            MemberQuantity: value.MemberQuantity,
-                            Description: value.Description
-                        });
-                    });
-                    e.success({ data: data, total: data.length });
-                },
-                create: function (e) {
-                    var data = e.data;
-                    var members = '';
-                    $scope.employees.forEach(function (value) {
-                        if (data.MemberIds.includes(value.id)) {
-                            members += '-' + value.name + '<br/>';
-                        }
-                    });
-                    data.Members = members; 
-                    e.success({ data: data });
-                },
-                update: function (e) {
-                    var data = e.data;
-                    var members = ''; 
-                    $scope.employees.forEach(function (value) {
-                        if (data.MemberIds.includes(value.id))
-                        {
-                            members += '-' + value.name + '<br/>'; 
-                        } 
-                    }); 
-                    data.Members = members;
-                    console.log(data);
-                    e.success({ data: data });
-                }
-            },
-            schema: {
-                data: 'data',
-                total: 'total',
-                model: {
-                    id: 'Id',
-                    fields: {
-                        Id: { type: "number", editable: false, nullable: false },
-                        TeamName: { type: 'string', editable: true },
-                        Leader: { type: 'string', editable: true },
-                        MemberIds: { type: 'object', editable: true },
-                        Members: { type: 'string', editable: true },
-                        MemberQuantity: { type: 'number', editable: false },
-                        Description: { type: 'string', editable: true }
-                    }
-                }
-            },
-            page: 1,
-            pageSize: 50
-        });
-       
-        $scope.TeamGridOptions = {
-            dataSource: $scope.dataSource,
-            toolbar: [{ name: "create", text: "Add New Team" }],
-            sortable: {
-                mode: "single",
-                allowUnsort: false
-            },
-            scrollable: true,
-            filterable: true,
-            editable: 'inline',
-            dataBound: function () {
-                this.expandRow(this.tbody.find("tr.k-master-row").first());
-            },
-            pageable: {
-                pageSizes: [10, 20, 50, "all"],
-                messages: {
-                    display: "Showing {0}-{1} in {2} records"
-                }
-            },
-            columnMenu: true,
-            columns: [
-                {
-                    title: "#",
-                    template: "#= Id #",
-                    width: 50,
-                    headerAttributes: {
-                        "class": "center",
+                        
                     },
-                    attributes: {
-                        "class": "center",
+                    create: function (e) {
+                        console.log(e.data);
+                        var data = { Id: e.data.Id, TeamName: e.data.TeamName, LeaderId: e.data.LeaderId, MemberIds: e.data.MemberIds, Description: e.data.Description };
+                        $rootScope.ajax.post("http://localhost:65235/api/Team/Create", data, function (team) {
+                            console.log(team);
+                            var members = '';
+                            var leader = '';
+                            $scope.employees.forEach(function (value) {
+                                if (e.data.MemberIds.includes(value.id)) {
+                                    members += '-' + value.name + '<br/>';
+                                }
+                            });
+                            $scope.employees.forEach(function (value) {
+                                if (e.data.LeaderId == value.id) {
+                                  leader = value.name;
+                                }
+                            });
+                            e.data.Members = members;
+                            e.data.Leader = leader;
+                            
+                            e.success({ data: e.data });
+                             
+                        }); 
+                    },
+                    update: function (e) {
+                        console.log(e.data);
+                        var data = { Id: e.data.Id, TeamName: e.data.TeamName, LeaderId: e.data.LeaderId, MemberIds: e.data.MemberIds, Description: e.data.Description };
+                        $rootScope.ajax.put("http://localhost:65235/api/Team/UpdateInfo", data, function (team) {
+                            console.log(team);
+                            $scope.positions = positions;
+                            getEmployeeData();
+                            bindDataGrid();
+                        });
+                        var members = '';
+                        $scope.employees.forEach(function (value) {
+                            if (data.MemberIds.includes(value.id)) {
+                                members += '-' + value.name + '<br/>';
+                            }
+                        });
+                        data.Members = members;
+                        console.log(data);
+                        e.success({ data: data });
                     }
                 },
-                {
-                    command: [
-                        { name: 'edit', title: 'Edit' },
-                        { name: "remove", template: '<a ng-click="delete(this, $event)" class="k-button k-button-icontext k-grid-edit"><span class="k-icon k-delete"></span>Delete</a>' }
-                    ],
-                    title: 'Action',
-                    width: 200,
-                    attributes: {
-                        "class": "center",
+                schema: {
+                    data: 'data',
+                    total: 'total',
+                    model: {
+                        id: 'Id',
+                        fields: {
+                            Id: { type: "number", editable: false, nullable: false },
+                            TeamName: { type: 'string', editable: true },
+                            Leader: { type: 'string', editable: true },
+                            LeaderId: { type: 'number', editable: true },
+                            MemberIds: { type: 'object', editable: true },
+                            Members: { type: 'string', editable: true }
+                        }
                     }
                 },
-                {
-                    field: "TeamName", title: "Team Name" 
+                page: 1,
+                pageSize: 50
+            });
+        }
+
+        var bindDataGrid = function () {
+            $scope.TeamGridOptions = {
+                dataSource: $scope.dataSource,
+                toolbar: [{ name: "create", text: "Add New Team" }],
+                sortable: {
+                    mode: "single",
+                    allowUnsort: false
                 },
-                {
-                    field: "Leader", title: "Leader", editor: readonlyEditor
+                scrollable: true,
+                filterable: true,
+                editable: 'inline',
+                dataBound: function () {
+                    this.expandRow(this.tbody.find("tr.k-master-row").first());
                 },
-                {
-                    field: "Members", title: "Members", editor: readonlyEditor, encoded : false
+                pageable: {
+                    pageSizes: [10, 20, 50, "all"],
+                    messages: {
+                        display: "Showing {0}-{1} in {2} records"
+                    }
                 },
-                {
-                    field: "MemberQuantity", title: "Member Quantity", editor: readonlyEditor 
-                }, {
-                    field: "Description", title: "Description" 
-                }]
-        };
+                columnMenu: true,
+                columns: [
+                    {
+                        title: "#",
+                        template: "#= Id #",
+                        width: 50,
+                        headerAttributes: {
+                            "class": "center",
+                        },
+                        attributes: {
+                            "class": "center",
+                        }
+                    },
+                    {
+                        command: [
+                            { name: 'edit', title: 'Edit' },
+                            { name: "remove", template: '<a ng-click="delete(this, $event)" class="k-button k-button-icontext k-grid-edit"><span class="k-icon k-delete"></span>Delete</a>' }
+                        ],
+                        title: 'Action',
+                        width: 200,
+                        attributes: {
+                            "class": "center",
+                        }
+                    },
+                    {
+                        field: "TeamName", title: "Team Name"
+                    },
+                    {
+                        field: "Leader", title: "Leader", editor: readonlyEditor
+                    },
+                    {
+                        field: "Members", title: "Members", editor: readonlyEditor, encoded: false
+                    }]
+            };
+        }
+       
+        
 
         $scope.data = [
             {
@@ -191,8 +227,7 @@
             window.alert('success', "Delete Success!");
             $scope.dataSource.remove(dataItem);
         }
-        
-        $scope.employees = [{ id: 1, name: "thanh" }, { id: 2, name: "uyen" }, { id: 3, name: "hung" }];
+         
         $scope.showDialog = showDialog;
         var alert;
         function showDialog($event) {

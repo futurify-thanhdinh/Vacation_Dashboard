@@ -44,7 +44,7 @@
                                 $window.alert("Please select only 1 images.");
                                 e.preventDefault();
                             }
-                            console.log(e);
+                           
                             var extension = [".jpg", ".png", ".jpge"];
                             var files = e.files; 
                             // Check the extension of each file and abort the upload if it is not .jpg
@@ -60,7 +60,7 @@
                             $scope.dataSource.read();
                         },
                         error: function (e) {
-                            console.log(e);
+                            $scope.dataSource.read();
                             $window.alert("Upload Image Fail");
                         },
                         select: function (e) {
@@ -81,7 +81,7 @@
 
                         $rootScope.ajax.get("http://localhost:65235/api/Employee/EmployeeList", function (employees) {
                             var position;
-                            console.log(employees);
+                            
                             employees.forEach(function (value) {
                                   $scope.positions.forEach(function (pos) {
                                       if (pos.id == value.positionId)
@@ -116,34 +116,81 @@
 
                     },
                     create: function (e) {
-                        //console.log(e.data);
-                        $scope.positions.forEach(function (value) {
-                            if (value.id == e.data.PositionId)
-                                e.data.Position = value.name;
-                        });
+                        var data = { Id: e.data.Id, FirstName: e.data.FirstName, LastName: e.data.LastName, BirthDate: e.data.BirthDate, Gender: e.data.GenderId, PositionId: e.data.PositionId, PhoneNumber: e.data.PhoneNumber, Email: e.data.Email, RemainDayOff: e.data.RemainDayOff, Avatar: e.data.Avatar };
+                        $rootScope.ajax.post("http://localhost:65235/api/Employee/Create", data, function (res) {
+                            var resData = [];
+                            var position;
+                            var gender;
+                            var genderid;
+                            $window.alert("Created New Employee Successfully"); 
 
-                        e.success({ data: e.data });
+                            $scope.positions.forEach(function (pos) {
+                                if (pos.id == res.positionId)
+                                    position = pos.name;
+                            });
+                            $scope.genders.forEach(function (gen) {
+                                if (gen.id == res.gender) {
+                                    gender = gen.value;
+                                    genderid = gen.id;
+                                }
+                            });
+                            resData.push({
+                                Id: res.id,
+                                FirstName: res.firstName,
+                                LastName: res.lastName,
+                                GenderId: genderid,
+                                Gender: gender,
+                                BirthDate: res.birthDate,
+                                PositionId: res.positionId,
+                                Position: position,
+                                PhoneNumber: res.phoneNumber,
+                                Email: res.email,
+                                RemainDayOff: 12,
+                                Avatar: res.avatar
+                            });
+
+                            $scope.dataSource.read();
+                            //e.success({ data: resData });
+                        });   
                     },
                     update: function (e) {
                         var data = { Id: e.data.Id, FirstName: e.data.FirstName, LastName: e.data.LastName, BirthDate: e.data.BirthDate, Gender: e.data.GenderId, PositionId: e.data.PositionId, PhoneNumber: e.data.PhoneNumber, Email: e.data.Email, RemainDayOff: e.data.RemainDayOff, Avatar: e.data.Avatar };
-                        $rootScope.ajax.get("http://localhost:65235/api/Employee/UpdateInfo", data, function (res) {
+                        $rootScope.ajax.put("http://localhost:65235/api/Employee/UpdateInfo", data, function (res) {
+                            var resData = [];
+                            var position;
+                            var gender;
+                            var genderid;
                             $window.alert("Updated Employee Infomation Successfully");
                             console.log(res);
-                        });
-                        console.log(e.data);
-                        $scope.genders.forEach(function (gen) {
-                            if (gen.id == e.data.GenderId)
-                            {
-                                e.data.Gender = gen.value;
-                                
-                            }
-                        });
-                        //console.log(e.data);
-                        $scope.positions.forEach(function (value) {
-                            if (value.id == e.data.PositionId)
-                                e.data.Position = value.name;
-                        });
-                        e.success({ data: e.data });
+                           
+                            $scope.positions.forEach(function (pos) {
+                                if (pos.id == res.positionId)
+                                    position = pos.name;
+                            }); 
+                            $scope.genders.forEach(function (gen) {
+                                if (gen.id == res.gender) {
+                                    gender = gen.value;
+                                    genderid = gen.id;
+                                }
+                            });
+                            resData.push({
+                                Id: res.id,
+                                FirstName: res.firstName,
+                                LastName: res.lastName,
+                                GenderId: genderid,
+                                Gender: gender,
+                                BirthDate: res.birthDate,
+                                PositionId: res.positionId,
+                                Position: position,
+                                PhoneNumber: res.phoneNumber,
+                                Email: res.email,
+                                RemainDayOff: res.remainDayOff,
+                                Avatar: res.avatar
+                            });
+                            
+                           
+                            e.success({ data: resData });
+                        }); 
                     }
                 },
                 schema: {
@@ -168,7 +215,7 @@
                     }
                 },
                 page: 1,
-                pageSize: 10
+                pageSize: 5
             });
         }
 
@@ -301,17 +348,27 @@
         }];
 
         $scope.delete = function (e, event) {
+            
             var confirm = window.confirm('Do you want to delete this employee?');
-            if (!confirm)
+            if (confirm) {
+                $rootScope.ajax.delete("http://localhost:65235/api/Employee/Delete/" + e.dataItem.Id, e.dataItem.Id, function (res) {
+                    console.log(res);
+                    var dataItem = e.dataItem;
+                    window.alert('success', "Delete employee Success!"); 
+                    $scope.dataSource.read();
+                });
+                return true;
+            }
+            else
+            {
                 return false;
-            //event.preventDefault();
-            var dataItem = e.dataItem;
-            //window.confirm('success', "Delete Success!");
-            window.alert('success', "Delete Success!");
-            $scope.dataSource.remove(dataItem);
+            }
+             
+
         }
         // enable or disable filter
-         
+
+
         $scope.showDialog = showDialog;
         var alert;
         function showDialog($event) {

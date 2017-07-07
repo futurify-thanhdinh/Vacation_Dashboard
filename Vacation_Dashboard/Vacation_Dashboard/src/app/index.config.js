@@ -70,6 +70,15 @@
             weight: 1
         });
 
+        // Apps.Profile.Position
+        msNavigationServiceProvider.saveItem('apps.profiles.positions', {
+            title: 'Positions',
+            icon: 'icon-briefcase',
+            state: 'app.profile.position',
+            class: 'navigation-dashboards project-dashboard',
+            weight: 1
+        });
+
         // Apps.Notification
         msNavigationServiceProvider.saveItem('apps.notifications', {
             title: 'Notifications',
