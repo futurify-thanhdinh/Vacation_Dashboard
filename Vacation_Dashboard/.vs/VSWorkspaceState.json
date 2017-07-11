@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Vacation_Dashboard",
+    "\\Vacation_Dashboard\\src",
+    "\\Vacation_Dashboard\\src\\app",
+    "\\Vacation_Dashboard\\src\\app\\main",
+    "\\Vacation_Dashboard\\src\\app\\main\\schedules",
+    "\\Vacation_Dashboard\\src\\app\\main\\schedules\\controllers"
+  ],
+  "SelectedNode": "\\Vacation_Dashboard\\src\\app\\main\\schedules\\controllers\\schedule.controller.js",
+  "PreviewInSolutionExplorer": false
+}

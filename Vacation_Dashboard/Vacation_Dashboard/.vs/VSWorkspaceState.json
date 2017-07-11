@@ -6,12 +6,11 @@
     "\\src\\app\\main",
     "\\src\\app\\main\\profiles",
     "\\src\\app\\main\\profiles\\employees",
-    "\\src\\app\\main\\profiles\\positions\\controllers",
-    "\\src\\app\\main\\profiles\\positions\\views",
     "\\src\\app\\main\\profiles\\teams",
     "\\src\\app\\main\\profiles\\teams\\controllers",
-    "\\src\\app\\main\\profiles\\teams\\views"
+    "\\src\\app\\main\\schedules",
+    "\\src\\app\\main\\schedules\\controllers"
   ],
-  "SelectedNode": "\\src\\app\\main\\profiles\\employees\\controllers\\employee.controller.js",
+  "SelectedNode": "\\src\\app\\main\\schedules\\controllers\\schedule.controller.js",
   "PreviewInSolutionExplorer": false
 }

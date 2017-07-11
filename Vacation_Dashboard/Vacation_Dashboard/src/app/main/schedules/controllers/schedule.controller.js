@@ -6,7 +6,7 @@
         .controller('ScheduleController', ScheduleController);
 
     /** @ngInject */
-    function ScheduleController($scope) {
+    function ScheduleController($scope, $http) {
         $scope.schedulerOptions = {
             date: new Date("2013/6/13"),
             startTime: new Date("2013/6/13 07:00 AM"),
@@ -21,9 +21,30 @@
             dataSource: {
                 batch: true,
                 transport: {
-                    read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                        dataType: "jsonp"
+                    //read: {
+                    //    url: "https://demos.telerik.com/kendo-ui/service/tasks",
+                    //    dataType: "jsonp"
+                    //},
+                   
+                    read: function (e) {
+                        var data = [];
+                        var beginDate = new Date("2017-07-11");
+                        var endDate = new Date("2017-07-11");
+                        data.push({
+                            TaskId: 1,
+                            Title: "ok",
+                            Start: beginDate,
+                            End: endDate,
+                            StartTimezone: "Etc/UTC",
+                            EndTimezone: "Etc/UTC",
+                            Description: null,
+                            RecurrenceId: null,
+                            RecurrenceRule: null,
+                            RecurrenceException: null,
+                            OwnerId: null,
+                            IsAllDay: false
+                        });
+                        e.success({ data: data });
                     },
                     update: {
                         url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
@@ -36,14 +57,10 @@
                     destroy: {
                         url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
                         dataType: "jsonp"
-                    },
-                    parameterMap: function (options, operation) {
-                        if (operation !== "read" && options.models) {
-                            return { models: kendo.stringify(options.models) };
-                        }
-                    }
+                    } 
                 },
                 schema: {
+                    total: 'total',
                     model: {
                         id: "taskId",
                         fields: {
@@ -82,6 +99,8 @@
                 }
             ]
         };
+
+        console.log($scope.schedulerOptions.dataSource);
     }
 
 })();

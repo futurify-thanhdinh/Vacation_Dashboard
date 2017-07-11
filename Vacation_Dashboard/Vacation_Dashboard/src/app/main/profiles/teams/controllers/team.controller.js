@@ -40,28 +40,28 @@
                     read: function (e) {
 
                         $rootScope.ajax.get("http://localhost:65235/api/Team/GetAllTeam", function (teams) {
-                            console.log(teams);
+                             
                             var data = [];
                             teams.forEach(function (value) {
                                 var members = '';
                                 var leader = '';
                                 var memberids = [];
-                                $scope.employees.forEach(function (value) {
-                                    if (value.MemberIds.includes(value.id)) {
-                                        members += '-' + value.name + '<br/>';
+                                $scope.employees.forEach(function (employee) {
+                                    if (value.memberIds.includes(employee.id)) {
+                                        members += '-' + employee.name + '<br/>';
                                     }
                                 });
-                                $scope.employees.forEach(function (value) {
-                                    if (e.data.LeaderId == value.id) {
-                                        leader = value.name;
+                                $scope.employees.forEach(function (employee) {
+                                    if (value.leaderId == employee.id) {
+                                        leader = employee.name;
                                     }
                                 });
                                 data.push({
-                                    Id: value.Id,
-                                    TeamName: value.Name,
-                                    Leader: value.Leader,
-                                    LeaderId: value.LeaderId,
-                                    MemberIds: memberids,
+                                    Id: value.id,
+                                    TeamName: value.name,
+                                    Leader: leader,
+                                    LeaderId: value.leaderId,
+                                    MemberIds: value.memberIds,
                                     Members: members
                                 });
                             });
@@ -70,10 +70,10 @@
                         
                     },
                     create: function (e) {
-                        console.log(e.data);
+                        
                         var data = { Id: e.data.Id, TeamName: e.data.TeamName, LeaderId: e.data.LeaderId, MemberIds: e.data.MemberIds, Description: e.data.Description };
                         $rootScope.ajax.post("http://localhost:65235/api/Team/Create", data, function (team) {
-                            console.log(team);
+                            
                             var members = '';
                             var leader = '';
                             $scope.employees.forEach(function (value) {
@@ -95,22 +95,27 @@
                     },
                     update: function (e) {
                         console.log(e.data);
-                        var data = { Id: e.data.Id, TeamName: e.data.TeamName, LeaderId: e.data.LeaderId, MemberIds: e.data.MemberIds, Description: e.data.Description };
+                        var data = { Id: e.data.Id, TeamName: e.data.TeamName, LeaderId: e.data.LeaderId, MemberIds: e.data.MemberIds };
                         $rootScope.ajax.put("http://localhost:65235/api/Team/UpdateInfo", data, function (team) {
-                            console.log(team);
-                            $scope.positions = positions;
-                            getEmployeeData();
-                            bindDataGrid();
+                            console.log(team); 
+                            $scope.dataSource.read();
                         });
-                        var members = '';
-                        $scope.employees.forEach(function (value) {
-                            if (data.MemberIds.includes(value.id)) {
-                                members += '-' + value.name + '<br/>';
-                            }
-                        });
-                        data.Members = members;
-                        console.log(data);
-                        e.success({ data: data });
+                        //var members = '';
+                        //var leader = '';
+                        //$scope.employees.forEach(function (value) {
+                        //    if (data.MemberIds.includes(value.id)) {
+                        //        members += '-' + value.name + '<br/>';
+                        //    }
+                        //});
+                        //$scope.employees.forEach(function (value) {
+                        //    if (data.LeaderId == value.id) {
+                        //        leader = value.name;
+                        //    }
+                        //});
+                        //e.data.Members = members;
+                        //e.data.Leader = leader;
+                        //console.log(data);
+                        //e.success({ data: data });
                     }
                 },
                 schema: {
