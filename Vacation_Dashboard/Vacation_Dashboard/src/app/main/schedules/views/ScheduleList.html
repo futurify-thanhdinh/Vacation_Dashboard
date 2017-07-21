@@ -1,8 +1,54 @@
 ﻿<h1 style="text-align:center;">Vacation Schedule</h1>
 
-<div ng-controller="ScheduleController">
+<div id="schedule-container" ng-controller="ScheduleController">
+  <div id="employee-dropdown" class="md-inline-form">
+    <md-content md-theme="docs-dark" layout="row" layout-padding>
+      <!--<div>
+        <md-input-container>
+          <label>Title</label>
+          <input ng-model="user.title">
+        </md-input-container>
+
+        <md-input-container>
+          <label>Email</label>
+          <input ng-model="user.email" type="email">
+        </md-input-container>
+      </div>-->
+      <div>
+        <md-input-container>
+          <h3 id="label-employee">Employees</h3>
+        </md-input-container>
+        <md-input-container > 
+          <md-select ng-model="EmployeeId" ng-change="setDateSource()">
+            <md-option value="1"> Tân Hoàng </md-option>
+            <md-option value="2"> Đinh Thành </md-option>
+            <md-option value="3"> Tôn Uyên </md-option>
+          </md-select>
+          <!--<select id="employees" kendo-drop-down-list k-options="customOptions"></select>-->
+        </md-input-container>
+        <md-input-container>
+          <h3 id="label-remain-day-off"> Remain Day Off :</h3>
+        </md-input-container>
+        <md-input-container> 
+           <h3 id="number-remain-day-off"><strong>5</strong></h3>
+        </md-input-container>
+      </div> 
+    </md-content>
+  </div>
+  <br/>
   <div kendo-scheduler k-options="schedulerOptions" style="margin : 10px 10px;">
     <span k-event-template class='custom-event'>{{dataItem.title}}</span>
     <div k-all-day-event-template class='custom-all-day-event'>{{dataItem.title}}</div>
   </div>
 </div>
+ <script id="event-template" type="text/x-kendo-template">
+  <div><h3>#: title #</h3></div>
+  <div>
+    <h4>
+        Assignee:
+        # for (var i = 0; i < resources.length; i++) { #
+        #: resources[i].text #
+        # } #
+    </h4>
+  </div>
+</script>

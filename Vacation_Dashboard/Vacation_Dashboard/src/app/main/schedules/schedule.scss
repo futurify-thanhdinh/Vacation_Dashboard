@@ -1,9 +1,28 @@
-﻿.custom-event {
-  color: #fff;
-  text-shadow: 0 1px 0 #000;
-}
+﻿
+#schedule-container {
+  .custom-event {
+    color: #fff;
+    text-shadow: 0 1px 0 #000;
+  }
 
-.custom-all-day-event {
-  text-align: center;
-  text-transform: uppercase
+  .custom-all-day-event {
+    text-align: center;
+    text-transform: uppercase
+  }
+
+  #employee-dropdown {
+    #label-employee {
+    }
+
+    #employees {
+      display: inline-block;
+    }
+
+    #label-remain-day-off {
+      display: inline-block;
+      margin-left: 500px;
+    }
+  }
+
+   
 }

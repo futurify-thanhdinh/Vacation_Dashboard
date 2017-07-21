@@ -18,9 +18,9 @@
       </div>
       <div class="title" translate="LOGIN_V2.TITLE">Log in to your account</div>
        
-      <form name="loginForm" novalidate>
+      <form name="loginForm" novalidate ng-submit="authenticate(UserName,Password,Remember )">
         <md-input-container class="md-block" md-no-float>
-          <input type="email" name="email" ng-model="email" placeholder="Email"
+          <input type="email" name="email" ng-model="UserName" placeholder="Email"
                  translate translate-attr-placeholder="LOGIN_V2.EMAIL"
                  ng-pattern="/^.+@.+\..+$/" required>
           <div ng-messages="loginForm.email.$error" role="alert" multiple>
@@ -33,7 +33,7 @@
           </div>
         </md-input-container>
         <md-input-container class="md-block" md-no-float>
-          <input type="password" name="password" ng-model="password" placeholder="Password"
+          <input type="password" name="password" ng-model="Password" placeholder="Password"
                  translate translate-attr-placeholder="LOGIN_V2.PASSWORD"
                  required>
           <div ng-messages="loginForm.password.$error" role="alert">
@@ -44,7 +44,7 @@
         </md-input-container>
         <div class="remember-forgot-password" layout="row" layout-sm="column"
              layout-align="space-between center">
-          <md-checkbox class="remember-me" ng-model="data.cb1" aria-label="Remember Me">
+          <md-checkbox class="remember-me" ng-model="Remember" aria-label="Remember Me">
             <span translate="LOGIN_V2.REMEMBER_ME">Remember Me</span>
           </md-checkbox>
           <a ui-sref="app.pages_auth_forgot-password" class="forgot-password md-accent-color"
@@ -52,7 +52,7 @@
         </div>
         <md-button type="submit" class="md-raised md-accent submit-button" aria-label="LOG IN"
                    ng-disabled="loginForm.$invalid || loginForm.$pristine"
-                   translate="LOGIN_V2.LOG_IN" translate-attr-aria-label="LOGIN_V2.LOG_IN" ng-click="authenticate(loginForm.email, loginForm.password)">
+                   translate="LOGIN_V2.LOG_IN" translate-attr-aria-label="LOGIN_V2.LOG_IN" >
           LOG IN
         </md-button>
       </form>

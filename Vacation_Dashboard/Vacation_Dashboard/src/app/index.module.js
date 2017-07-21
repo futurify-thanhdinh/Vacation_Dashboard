@@ -50,6 +50,8 @@
 
             'app.pages.auth.forgot-password',
 
-            'app.profile.position'
+            'app.profile.position',
+
+            'app.auth'
         ]);
 })();
