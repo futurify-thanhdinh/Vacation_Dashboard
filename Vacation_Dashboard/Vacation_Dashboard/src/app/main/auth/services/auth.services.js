@@ -74,27 +74,7 @@
 
         function SignInAsync(userName, password, remember) {
             var deferer = $q.defer();
-            //$http({
-            //    method: 'POST',
-            //    url: baseUrl + '/token',
-            //    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            //    transformRequest: function (obj) {
-            //        var str = [];
-            //        for (var p in obj)
-            //            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            //        return str.join("&");
-            //    },
-            //    data: { "username": userName, "password": password }
-            //}).then(function (response) {
-            //    console.log(response);
-            //    _authenticate(response.data, remember);
-            //    _syncPermissions().then(function () {
-            //        deferer.resolve();
-            //    })
-
-            //}, function (error) {
-            //    deferer.reject(error.data);
-            //});
+             
 
             $http.post(baseUrl + '/token', { username: userName, password: password }, {
                 headers: {
@@ -110,7 +90,7 @@
             }).then(function (response) {
                 console.log(response);
                 _authenticate(response.data, remember);
-                _syncPermissions().then(function () {
+                _syncPermissions(service.Account.Id).then(function () {
                     deferer.resolve();
                 })
 
@@ -267,9 +247,10 @@
             }
         }
 
-        function _syncPermissions() {
+        function _syncPermissions(accountId) {
             if (service.IsAuthenticated) {
-                return $http.get(baseUrl + '/api/account/me/permissions', { hideAjaxLoader: true }).then(function (permissions) {
+                return $http.get(baseUrl + '/api/account/me/permissions/' + accountId, { hideAjaxLoader: true }).then(function (permissions) {
+                    console.log(permissions);
                     service.Permissions = permissions.data;
                     $rootScope.$emit('PERMISSIONS_LOADED');
 

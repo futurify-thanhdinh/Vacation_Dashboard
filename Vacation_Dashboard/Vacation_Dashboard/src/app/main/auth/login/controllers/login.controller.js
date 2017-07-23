@@ -6,25 +6,23 @@
         .controller('LoginV2Controller', LoginV2Controller);
 
     /** @ngInject */
-    function LoginV2Controller($scope, $state, SVCS, $http, AuthenticationService) {
+    function LoginV2Controller($scope, $state, SVCS, $http, AuthenticationService, $timeout) {
         var ctrl = this;
         $scope.UserName;
         $scope.Password;
         $scope.Remember;
-        $scope.authenticate = function (UserName, Password, Remember) {
+        $scope.authenticate = function () {
             ctrl.error = null;
             ctrl.loggingIn = true;
-            console.log(UserName);
-            console.log(Password);
-            AuthenticationService.SignInAsync(UserName, Password, Remember).then(function () {
+            console.log(loginForm.UserName.value);
+            console.log(loginForm.Password.value);
+            console.log($scope.Remember);
+            AuthenticationService.SignInAsync(loginForm.UserName.value, loginForm.Password.value, $scope.Remember).then(function () {
                 ctrl.loggingIn = false;
 
                 if (AuthenticationService.Permissions.indexOf('CREATE_USER') != -1 && AuthenticationService.Permissions.length == 1) {
-                    ctrl.error = { denied: true };
-                    AuthenticationService.SignOut();
-                } else {
                     $state.go('app.sample');
-                }
+                }  
 
             }, function (error) {
                 $timeout(function () {
