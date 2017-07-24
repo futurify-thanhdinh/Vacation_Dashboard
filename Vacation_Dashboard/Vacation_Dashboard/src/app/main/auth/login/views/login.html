@@ -18,7 +18,7 @@
       </div>
       <div class="title" translate="LOGIN_V2.TITLE">Log in to your account</div>
        
-      <form name="loginForm" novalidate ng-submit="authenticate(UserName,Password,Remember )">
+      <form name="loginForm" >
         <md-input-container class="md-block" md-no-float>
           <input type="email" name="email" ng-model="UserName" placeholder="Email"
                  translate translate-attr-placeholder="LOGIN_V2.EMAIL"
@@ -52,7 +52,7 @@
         </div>
         <md-button type="submit" class="md-raised md-accent submit-button" aria-label="LOG IN"
                    ng-disabled="loginForm.$invalid || loginForm.$pristine"
-                   translate="LOGIN_V2.LOG_IN" translate-attr-aria-label="LOGIN_V2.LOG_IN" >
+                   translate="LOGIN_V2.LOG_IN" translate-attr-aria-label="LOGIN_V2.LOG_IN" ng-click="authenticate(UserName,Password,Remember )">
           LOG IN
         </md-button>
       </form>
