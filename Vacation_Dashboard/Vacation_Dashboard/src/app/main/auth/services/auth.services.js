@@ -90,7 +90,7 @@
             }).then(function (response) {
                 console.log(response);
                 _authenticate(response.data, remember);
-                _syncPermissions().then(function () {
+                _syncPermissions(service.Account.Id).then(function () {
                     deferer.resolve();
                 })
 
@@ -247,9 +247,10 @@
             }
         }
 
-        function _syncPermissions() {
+        function _syncPermissions(accountId) {
             if (service.IsAuthenticated) {
-                return $http.get(baseUrl + '/api/account/me/permissions', { hideAjaxLoader: true }).then(function (permissions) {
+                return $http.get(baseUrl + '/api/account/me/permissions/' + accountId, { hideAjaxLoader: true }).then(function (permissions) {
+                    console.log(permissions);
                     service.Permissions = permissions.data;
                     $rootScope.$emit('PERMISSIONS_LOADED');
 

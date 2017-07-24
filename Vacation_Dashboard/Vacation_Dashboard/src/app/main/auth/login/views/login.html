@@ -20,10 +20,10 @@
        
       <form name="loginForm" >
         <md-input-container class="md-block" md-no-float>
-          <input type="email" name="email" ng-model="UserName" placeholder="Email"
+          <input type="email" name="UserName" ng-model="UserName" placeholder="Email"
                  translate translate-attr-placeholder="LOGIN_V2.EMAIL"
-                 ng-pattern="/^.+@.+\..+$/" required>
-          <div ng-messages="loginForm.email.$error" role="alert" multiple>
+                 ng-pattern="/^.+@.+\..+$/" required ng-value="UserName">
+          <div ng-messages="loginForm.UserName.$error" role="alert" multiple>
             <div ng-message="required">
               <span translate="LOGIN_V2.ERRORS.EMAIL_REQUIRED">Email field is required</span>
             </div>
@@ -33,10 +33,10 @@
           </div>
         </md-input-container>
         <md-input-container class="md-block" md-no-float>
-          <input type="password" name="password" ng-model="Password" placeholder="Password"
+          <input type="password" name="Password"  ng-model="Password" placeholder="Password"
                  translate translate-attr-placeholder="LOGIN_V2.PASSWORD"
-                 required>
-          <div ng-messages="loginForm.password.$error" role="alert">
+                 required ng-value="Password">
+          <div ng-messages="loginForm.Password.$error" role="alert">
             <div ng-message="required">
               <span translate="LOGIN_V2.ERRORS.PASSWORD_REQUIRED">Password field is required</span>
             </div>
@@ -44,15 +44,19 @@
         </md-input-container>
         <div class="remember-forgot-password" layout="row" layout-sm="column"
              layout-align="space-between center">
-          <md-checkbox class="remember-me" ng-model="Remember" aria-label="Remember Me">
+          <md-checkbox class="remember-me" name="Remember" ng-model="Remember" aria-label="Remember Me">
             <span translate="LOGIN_V2.REMEMBER_ME">Remember Me</span>
           </md-checkbox>
           <a ui-sref="app.pages_auth_forgot-password" class="forgot-password md-accent-color"
              translate="LOGIN_V2.FORGOT_PASSWORD">Forgot Password?</a>
         </div>
-        <md-button type="submit" class="md-raised md-accent submit-button" aria-label="LOG IN"
+        <md-button type="button" class="md-raised md-accent submit-button" aria-label="LOG IN"
                    ng-disabled="loginForm.$invalid || loginForm.$pristine"
+<<<<<<< HEAD
                    translate="LOGIN_V2.LOG_IN" translate-attr-aria-label="LOGIN_V2.LOG_IN" ng-click="authenticate(UserName,Password,Remember )">
+=======
+                   translate="LOGIN_V2.LOG_IN" translate-attr-aria-label="LOGIN_V2.LOG_IN" ng-click="authenticate()">
+>>>>>>> 02b113f8aaeab53432e51a74949b326d43cb5264
           LOG IN
         </md-button>
       </form>
