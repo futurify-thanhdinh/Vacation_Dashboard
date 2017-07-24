@@ -8,15 +8,14 @@
     /** @ngInject */
     function LoginV2Controller($scope, $state, SVCS, $http, AuthenticationService, $timeout) {
         var ctrl = this;
-        $scope.UserName;
-        $scope.Password;
+       
         $scope.Remember;
         $scope.authenticate = function () {
             ctrl.error = null;
             ctrl.loggingIn = true;
-            console.log(loginForm.UserName.value);
-            console.log(loginForm.Password.value);
-            console.log($scope.Remember);
+            //console.log(loginForm.UserName.value);
+            //console.log(loginForm.Password.value);
+            //console.log($scope.Remember);
             AuthenticationService.SignInAsync(loginForm.UserName.value, loginForm.Password.value, $scope.Remember).then(function () {
                 ctrl.loggingIn = false;
 

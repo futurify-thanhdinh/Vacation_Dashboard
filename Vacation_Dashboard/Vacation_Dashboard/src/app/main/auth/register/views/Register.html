@@ -1,14 +1,13 @@
-﻿<div id="register-v2" layout="row" layout-align="start">
+﻿<div id="register-v2" layout="row" layout-align="start" ng-controller="RegisterV2Controller">
   <div id="register-v2-intro" flex hide show-gt-sm>
     <div class="logo md-accent-bg">
       <span>F</span>
     </div>
     <div class="title" translate="REGISTER_V2.INTRO_TITLE">
-      Welcome to the FUSE!
+      Welcome to the Futurify Vacation!
     </div>
     <div class="description" translate="REGISTER_V2.INTRO_DESCRIPTION">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat,
-      vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra.
+       Let's register new account and book vacation on your own ! 
     </div>
   </div>
   <div id="register-v2-form-wrapper" class="flex-scrollable md-whiteframe-8dp" layout="column" flex ms-scroll>
@@ -18,21 +17,31 @@
       </div>
       <div class="title" translate="REGISTER_V2.TITLE">Create an account</div>
       <div class="description" translate="REGISTER_V2.DESCRIPTION">
-        Sed mollis velit facilisis facilisis viverra
+        Let's register new account and book vacation on your own !
       </div>
       <form name="registerForm" novalidate>
         <md-input-container class="md-block" md-no-float>
-          <input name="username" ng-model="vm.form.username" placeholder="Name"
-                 translate translate-attr-placeholder="REGISTER_V2.NAME"
+          <input name="firstName" ng-model="firstName" placeholder="FirstName"
+                 translate translate-attr-placeholder="REGISTER_V2.FIRSTNAME"
                  required>
-          <div ng-messages="registerForm.username.$error" role="alert">
+          <div ng-messages="registerForm.firstName.$error" role="alert">
             <div ng-message="required">
-              <span translate="REGISTER_V2.ERRORS.USERNAME_REQUIRED">Username field is required</span>
+              <span translate="REGISTER_V2.ERRORS.FIRSTNAME_REQUIRED">FirstName field is required</span>
             </div>
           </div>
         </md-input-container>
         <md-input-container class="md-block" md-no-float>
-          <input type="email" name="email" ng-model="vm.form.email" placeholder="Email"
+          <input name="LastName" ng-model="lastName" placeholder="LastName"
+                 translate translate-attr-placeholder="REGISTER_V2.LASTNAME"
+                 required>
+          <div ng-messages="registerForm.LastName.$error" role="alert">
+            <div ng-message="required">
+              <span translate="REGISTER_V2.ERRORS.LASTNAME_REQUIRED">Username field is required</span>
+            </div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block" md-no-float>
+          <input type="email" name="email" ng-model="email" placeholder="Email"
                  translate translate-attr-placeholder="REGISTER_V2.EMAIL"
                  ng-pattern="/^.+@.+\..+$/" required>
           <div ng-messages="registerForm.email.$error" role="alert" multiple>
@@ -45,7 +54,7 @@
           </div>
         </md-input-container>
         <md-input-container class="md-block" md-no-float>
-          <input type="password" name="password" ng-model="vm.form.password" placeholder="Password"
+          <input type="password" name="password" ng-model="password" placeholder="Password"
                  translate translate-attr-placeholder="REGISTER_V2.PASSWORD"
                  required>
           <div ng-messages="registerForm.password.$error" role="alert">
@@ -55,7 +64,7 @@
           </div>
         </md-input-container>
         <md-input-container class="md-block" md-no-float>
-          <input type="password" name="passwordConfirm" ng-model="vm.form.passwordConfirm"
+          <input type="password" name="passwordConfirm" ng-model="passwordConfirm"
                  placeholder="Password (Confirm)"
                  translate translate-attr-placeholder="REGISTER_V2.PASSWORD_CONFIRM"
                  required>
@@ -66,16 +75,12 @@
           </div>
         </md-input-container>
         <div class="terms" layout="row" layout-align="center center">
-          <md-checkbox name="terms" ng-model="data.cb1" aria-label="I read and accept" required></md-checkbox>
-          <div layout="row" layout-sm="column" layout-align="start center">
-            <span translate="REGISTER_V2.READ_ACCEPT">I read and accept</span>
-            <a href="#" class="md-accent-color" translate="REGISTER_V2.TERMS_COND">terms and conditions</a>
-          </div>
+          
         </div>
         <md-button type="submit" class="md-raised md-accent submit-button" aria-label="CREATE MY ACCOUNT"
                    ng-disabled="registerForm.$invalid || registerForm.$pristine"
                    translate="REGISTER_V2.CREATE_ACCOUNT"
-                   translate-attr-aria-label="REGISTER_V2.CREATE_ACCOUNT">
+                   translate-attr-aria-label="REGISTER_V2.CREATE_ACCOUNT" ng-click="Register()">
           CREATE MY ACCOUNT
         </md-button>
       </form>
