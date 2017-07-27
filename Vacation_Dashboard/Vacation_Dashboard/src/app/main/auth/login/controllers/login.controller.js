@@ -11,6 +11,7 @@
        
         $scope.Remember;
         $scope.authenticate = function () {
+            $state.go('app.sample');
             ctrl.error = null;
             ctrl.loggingIn = true;
             //console.log(loginForm.UserName.value);
@@ -39,11 +40,8 @@
                         ctrl.error = { busy: true }
                     }
                 }, 300)
-            }) 
-            
-            
-            
-            
+            })  
         }
+         
     }
 })();

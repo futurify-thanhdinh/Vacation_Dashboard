@@ -1,16 +1,20 @@
-{
-    "RESETPASSWORD": {
-        "TITLE": "Reset your password",
-        "EMAIL_ADRESS": "Email address",
-        "PASSWORD": "Password",
-        "PASSWORD_CONFIRM": "Password (Confirm)",
-        "UPDATE_PASSWORD": "RESET MY PASSWORD",
-        "GO_BACK": "Go back to login",
-        "ERRORS": {
-            "EMAIL_REQUIRED": "Email field is required",
-            "EMAIL_MUST_VALID": "Email must be a valid e-mail address",
-            "PASSWORD_REQUIRED": "Password field is required",
-            "PASSWORD_CONFIRM_REQUIRED": "Password (Confirm) field is required"
-        }
+﻿{
+  "RESETPASSWORD": {
+    "TITLE": "Reset your password",
+    "EMAIL_ADRESS": "Email address",
+    "VERIFICATION_CODE": "Verification Code",
+    "NEW_PASSWORD": "New Password",
+    "OLD_PASSWORD": "Old Password",
+    "PASSWORD_CONFIRM": "Password (Confirm)",
+    "UPDATE_PASSWORD": "RESET MY PASSWORD",
+    "GO_BACK": "Go back to login",
+    "ERRORS": {
+      "EMAIL_REQUIRED": "Email field is required",
+      "VERIFICATION_CODE_REQUIRED": "Verification Code field is required",
+      "EMAIL_MUST_VALID": "Email must be a valid e-mail address",
+      "OLD_PASSWORD_REQUIRED": "Old Password field is required",
+      "NEW_PASSWORD_REQUIRED": "New Password field is required",
+      "NEW_PASSWORD_CONFIRM_REQUIRED": "New Password (Confirm) field is required"
     }
+  }
 }

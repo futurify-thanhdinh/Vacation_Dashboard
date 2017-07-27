@@ -24,6 +24,7 @@
     function AuthenticationService(SVCS, $cookies, $http, $q, $interval, $rootScope) {
 
         var baseUrl = SVCS.Auth;
+        var accountUrl = baseUrl + "/api/account";
 
         var loadCurrentPromises = [];
         var loadCurrentProfilePromises = [];
@@ -64,12 +65,23 @@
             VerifyPinCode: VerifyPinCode,
             ResetPasswordByPhoneNumber: ResetPasswordByPhoneNumber,
             ResetPasswordByEmail: ResetPasswordByEmail,
-            Profile: null
+            Profile: null,
+            registerAccount: registerAccount
         };
 
         $rootScope.$authSrv = service;
 
-      
+        function registerAccount(data)
+        {
+            var deferer = $q.defer();
+            $http.post(SVCS.Auth + "/api/account/register", data).then(function () {
+                deferer.resolve();
+            }, function (error) {
+                deferer.reject(error.data);
+            });
+
+            return deferer.promise;
+        }
 
 
         function SignInAsync(userName, password, remember) {
@@ -137,7 +149,7 @@
         function RequestResetPasswordByEmail(email) {
             var deferer = $q.defer();
 
-            $http.get(baseUrl + '/api/account/reset-password/email-request?email=' + email).then(function () {
+            $http.get(accountUrl + '/RequestResetPasswordByEmail/' + email).then(function () {
                 deferer.resolve();
             }, function (error) {
                 deferer.reject(error.data);
@@ -172,10 +184,10 @@
             return deferer.promise;
         }
 
-        function ResetPasswordByEmail(email, token, newPassword) {
+        function ResetPasswordByEmail(email, code, oldPassword, newPassword) {
             var deferer = $q.defer();
 
-            var model = { Email: email, Token: token, NewPassword: newPassword };
+            var model = { Email: email, Code: code, OldPassword: oldPassword, NewPassword: newPassword };
             $http.put(baseUrl + '/api/account/reset-password/email', model).then(function () {
                 deferer.resolve();
             }, function (error) {

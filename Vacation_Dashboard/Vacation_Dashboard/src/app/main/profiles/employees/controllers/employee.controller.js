@@ -81,7 +81,7 @@
 
                         $rootScope.ajax.get("http://localhost:65235/api/Employee/EmployeeList", function (employees) {
                             var position;
-                            
+                            console.log(employees);
                             employees.forEach(function (value) {
                                   $scope.positions.forEach(function (pos) {
                                       if (pos.id == value.positionId)

@@ -54,29 +54,65 @@
           </div>
         </md-input-container>
         <md-input-container class="md-block" md-no-float>
-          <input type="password" name="password" ng-model="password" placeholder="Password"
-                 translate translate-attr-placeholder="REGISTER_V2.PASSWORD"
-                 required>
-          <div ng-messages="registerForm.password.$error" role="alert">
+          <input type="text" name="PhoneNumber" ng-model="PhoneNumber" placeholder="PhoneNumber"
+                 translate translate-attr-placeholder="REGISTER_V2.PHONE_NUMBER"
+                 ng-pattern="/^[0-9]{10,}$/" required>
+          <div ng-messages="registerForm.PhoneNumber.$error" role="alert" multiple>
             <div ng-message="required">
-              <span translate="REGISTER_V2.ERRORS.PASSWORD_REQUIRED">Password field is required</span>
+              <span translate="REGISTER_V2.ERRORS.PHONE_NUMBER_REQUIRED">Phone number field is required</span>
+            </div> 
+            <div ng-message="pattern">
+              <span translate="REGISTER_V2.ERRORS.PHONE_NUMBER_MUST_VALID">Phone number must be a valid </span>
             </div>
           </div>
         </md-input-container>
-        <md-input-container class="md-block" md-no-float>
-          <input type="password" name="passwordConfirm" ng-model="passwordConfirm"
-                 placeholder="Password (Confirm)"
-                 translate translate-attr-placeholder="REGISTER_V2.PASSWORD_CONFIRM"
-                 required>
-          <div ng-messages="registerForm.passwordConfirm.$error" role="alert">
+        <md-input-container class="dropdown">
+          <label>Positions</label>
+          <md-select class="dropdown" name="Position" ng-model="selectedPositions"
+                     md-on-close="clearSearchTerm()"
+                     data-md-container-class="selectdemoSelectHeader">
+            <md-select-header class="demo-select-header">
+              <input ng-model="searchTerm"
+                     type="search"
+                     placeholder="Search for a position.."
+                     class="demo-header-searchbox md-text">
+            </md-select-header>
+            <md-optgroup label="Positions"> 
+              <md-option ng-value="position.id" ng-repeat="position in positions |
+              filter:searchTerm">{{position.value}}</md-option>
+            </md-optgroup>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="dropdown">
+          <label>Gender</label>
+          <md-select class="dropdown" name="Gender" ng-model="selectedGender"
+                     md-on-close="clearSearchTerm()"
+                     data-md-container-class="selectdemoSelectHeader">
+            <md-select-header class="demo-select-header">
+              <input ng-model="searchTerm"
+                     type="search"
+                     placeholder="Search for a gender.."
+                     class="demo-header-searchbox md-text">
+            </md-select-header>
+            <md-optgroup label="Gender"> 
+              <md-option ng-value="gender" ng-repeat="gender in genders |
+              filter:searchTerm">{{gender}}</md-option>
+            </md-optgroup>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="datepicker">
+          <label>Date of Birth</label>
+          <md-datepicker type="date" class="datepicker" name="DoB" ng-model="BirthDay" md-current-view="day" required translate-attr-placeholder="REGISTER_V2.BIRTHDAY md-placeholder="Date Of Birth"></md-datepicker>
+           
+          <div ng-messages="registerForm.DoB.$error" role="alert" multiple>
             <div ng-message="required">
-              <span translate="REGISTER_V2.ERRORS.PASSWORD_CONFIRM_REQUIRED">Password (Confirm) field is required</span>
-            </div>
+              <span translate="REGISTER_V2.ERRORS.BIRTHDAY_REQUIRED">Data of Birth field is required</span>
+            </div> 
           </div>
         </md-input-container>
-        <div class="terms" layout="row" layout-align="center center">
+        <!--<div class="terms" layout="row" layout-align="center center">
           
-        </div>
+        </div>-->
         <md-button type="submit" class="md-raised md-accent submit-button" aria-label="CREATE MY ACCOUNT"
                    ng-disabled="registerForm.$invalid || registerForm.$pristine"
                    translate="REGISTER_V2.CREATE_ACCOUNT"
@@ -90,4 +126,6 @@
       </div>
     </div>
   </div>
+  
+ 
 </div>

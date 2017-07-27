@@ -1,25 +1,32 @@
-{
-    "REGISTER_V2": {
-        "INTRO_TITLE": "Welcome to the FUSE!",
-        "INTRO_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat, vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra.",
-        "TITLE": "Create an account",
-        "DESCRIPTION": "Sed mollis velit facilisis facilisis viverra",
-        "NAME": "Name",
-        "EMAIL": "Email",
-        "PASSWORD": "Password",
-        "PASSWORD_CONFIRM": "Password (Confirm)",
-        "READ_ACCEPT": "I read and accept",
-        "TERMS_COND": "terms and conditions",
-        "CREATE_ACCOUNT": "CREATE MY ACCOUNT",
-        "ALREADY_HAVE": "Already have an account?",
-        "LOGIN": "Log in",
-        "ERRORS": {
-            "USERNAME_REQUIRED": "Username field is required",
-            "EMAIL_REQUIRED": "Email field is required",
-            "EMAIL_MUST_VALID": "Email must be a valid e-mail address",
-            "PASSWORD_REQUIRED": "Password field is required",
-            "PASSWORD_CONFIRM_REQUIRED": "Password confirm field is required",
-            "TERMS_REQUIRED": "You must accept terms and conditions before submitting the form"
-        }
+﻿{
+  "REGISTER_V2": {
+    "INTRO_TITLE": "Welcome to the Futurify Vacation!",
+    "INTRO_DESCRIPTION": "Futurify Vacation is a Vacation Scheduler and Management Website of All Staff in Futurify Company",
+    "TITLE": "Create an account",
+    "DESCRIPTION": "Let's register new account and book vacation on your own !",
+    "FIRSTNAME": "FirstName",
+    "LASTNAME": "LastName",
+    "EMAIL": "Email",
+    "PHONE_NUMBER": "Phone Number",
+    "BIRTHDAY": "Date of Birth",
+    "PASSWORD": "Password",
+    "PASSWORD_CONFIRM": "Password (Confirm)",
+    "READ_ACCEPT": "I read and accept",
+    "TERMS_COND": "terms and conditions",
+    "CREATE_ACCOUNT": "CREATE MY ACCOUNT",
+    "ALREADY_HAVE": "Already have an account?",
+    "LOGIN": "Log in",
+    "ERRORS": {
+      "PHONE_NUMBER_REQUIRED": "Phone number is required",
+      "FIRSTNAME_REQUIRED": "FirstName field is required",
+      "BIRTHDAY_REQUIRED": "Data of Birth field is required",
+      "LASTNAME_REQUIRED": "LastName field is required",
+      "EMAIL_REQUIRED": "Email field is required",
+      "EMAIL_MUST_VALID": "Email must be a valid e-mail address",
+      "PHONE_NUMBER_MUST_VALID": "Phone number must be a valid",
+      "PASSWORD_REQUIRED": "Password field is required",
+      "PASSWORD_CONFIRM_REQUIRED": "Password confirm field is required",
+      "TERMS_REQUIRED": "You must accept terms and conditions before submitting the form"
     }
+  }
 }
